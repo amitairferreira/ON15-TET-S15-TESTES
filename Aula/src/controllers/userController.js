@@ -48,8 +48,8 @@ const updateUserById = async (req, res) => {
 
   } catch (error) {
     console.error(error)
-  };
-};
+  }
+}
 
 const deleteUserById = async (req, res) => {
   try {
@@ -57,17 +57,17 @@ const deleteUserById = async (req, res) => {
 
     await userFound.delete()
 
-    return res.status(200).send({
-      "mensagem": `Usuário '${userFound.email}' deletada com sucesso!`,
+    return res.status(200).json({
+      mensagem: `Usuário '${userFound.email}' deletada com sucesso!`,
       userFound
     })
 
   } catch (err) {
-    return res.status(400).send({
-      "mensagem": err.message
-    });
-  };
-};
+    return res.status(400).json({
+      mensagem: err.message
+    })
+  }
+}
 
 module.exports = {
   getAll,
