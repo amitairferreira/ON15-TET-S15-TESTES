@@ -5,15 +5,15 @@ const app = require('../app')
 // jest.useRealTimers()
 let elementId
 
-describe('API TEST', () => {
+describe('API test', () => {
   //agrupar vários testes
   //testar primeiro a rota GET
 
-  test('GET /users/all', done => {
+  test('GET /users/all', (done) => {
     request(app)
       .get('/users/all')
       .expect(200)
-      .expect(res => {
+      .expect((res) => {
         console.log('BODY DA RESPOSTA', res.body)
         expect(res.body.length).not.toBe(0)
       })
@@ -23,7 +23,7 @@ describe('API TEST', () => {
       })
   })
 
-  test('POST /users/create', done => {
+  test('POST /users/create', (done) => {
     request(app)
       .post('/users/create')
       .expect('Content-Type', /json/)
@@ -44,7 +44,7 @@ describe('API TEST', () => {
         return done()
       })
   })
-  test('PATCH /users/update/:id', done => {
+  test('PATCH /users/update/:id', (done) => {
     request(app)
       .patch(`/users/update/${elementId}`)
       .expect('Content-Type', /json/)
@@ -53,7 +53,7 @@ describe('API TEST', () => {
         email: 'paulaatualizado@email.com'
       })
       .expect(200)
-      .expect(res => {
+      .expect((res) => {
         expect(res.body.savedUser._id).toBe(elementId)
         expect(res.body.savedUser.name).toBe('Paula Atualizado')
         expect(res.body.savedUser.email).toBe('paulaatualizado@email.com')
@@ -64,12 +64,12 @@ describe('API TEST', () => {
       })
   })
 
-  test('DELETE /users/delete/:id', done => {
+  test('DELETE /users/delete/:id', (done) => {
     request(app)
       .delete(`/users/delete/${elementId}`)
       .expect('Content-Type', /json/)
       .expect(200)
-      .expect(res => {
+      .expect((res) => {
         console.log("DELETE", res.body)
         expect(res.body.userFound.email).toBe('paulaatualizado@email.com')
       })
